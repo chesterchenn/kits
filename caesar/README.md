@@ -1,6 +1,6 @@
 # caesar
-[![Build Status](https://travis-ci.org/chesterchenn/caesar.svg?branch=master)](https://travis-ci.org/chesterchenn/caesar)  
-这是一个实现凯撒密码的实验性功能模块，未进行发布。
+
+这是一个实现凯撒密码的实验性功能模块。
 
 ## 使用
 1. 可以将文件下的index.js修改成需要的文件名，引入进来
