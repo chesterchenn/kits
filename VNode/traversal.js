@@ -1,18 +1,32 @@
 /**
+ * 判断空白节点
+ */
+function trimNode(node) {
+  const val = node.nodeValue;
+  if (val && !/\s+$/.test(val)) {
+    return val;
+  }
+}
+
+/**
  * 使用递归方式先序遍历 DOM 树
  * @param node 要遍历的节点
  */
 function traversal(node) {
   if (node && node.nodeType === 1) {
-    console.log(node.tagName);
+    console.log(node.tagName.toLowerCase());
   }
-  var i = 0,
-    childNodes = node.childNodes,
-    item;
-  for (; i < childNodes.length; i++) {
-    item = childNodes[i];
+  if (node && node.nodeType === 3) {
+    const val = trimNode(node);
+    if (val) {
+      console.log(val);
+    }
+  }
+  var childNodes = node.childNodes;
+  for (var i = 0; i < childNodes.length; i++) {
+    var item = childNodes[i];
 
-    if (item.nodeType === 1) {
+    if (item.nodeType === 1 || item.nodeType === 3) {
       traversal(item);
     }
   }
@@ -61,3 +75,31 @@ function traversalIteration(node) {
   }
   console.log(elementCount);
 }
+
+/**
+ * 来自 MDN 的遍历节点的例子
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Node
+ */
+function eachNode(rootNode, callback) {
+  if (!callback) {
+    const nodes = [];
+    eachNode(rootNode, function (node) {
+      nodes.push(node);
+    });
+    return nodes;
+  }
+
+  if (false === callback(rootNode)) {
+    return false;
+  }
+
+  if (rootNode.hasChildNodes()) {
+    const nodes = rootNode.childNodes;
+    for (let i = 0, l = nodes.length; i < l; ++i) {
+      if (false === eachNode(nodes[i], callback)) {
+        return;
+      }
+    }
+  }
+}
+
