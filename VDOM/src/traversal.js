@@ -1,18 +1,10 @@
-/**
- * 判断空白节点
- */
-function trimNode(node) {
-  const val = node.nodeValue;
-  if (val && !/\s+$/.test(val)) {
-    return val;
-  }
-}
+import { trimNode } from './utils';
 
 /**
  * 使用递归方式先序遍历 DOM 树
  * @param node 要遍历的节点
  */
-function traversal(node) {
+export function traversal(node) {
   if (node && node.nodeType === 1) {
     console.log(node.tagName.toLowerCase());
   }
@@ -36,7 +28,7 @@ function traversal(node) {
  * 使用迭代方式先序遍历 DOM 树
  * @param node 要遍历的节点
  */
-function traversalIteration(node) {
+export function traversalIteration(node) {
   var array = [],
     i = 0,
     k = 0,
@@ -80,7 +72,7 @@ function traversalIteration(node) {
  * 来自 MDN 的遍历节点的例子
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Node
  */
-function eachNode(rootNode, callback) {
+export function eachNode(rootNode, callback) {
   if (!callback) {
     const nodes = [];
     eachNode(rootNode, function (node) {
