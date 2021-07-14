@@ -13,6 +13,10 @@
         <li>item</li>
       </ul>
     </div>
-    <script src="./traversal.js"></script>
+    <script type="module" >
+      import { traversal } from "../dist/index.js";
+      const root = document.getElementById("root");
+      traversal(root);
+    </script>
   </body>
 </html>

@@ -1,12 +1,18 @@
 {
-  "name": "VDOM",
+  "name": "vdom",
   "version": "0.1.0",
   "description": "用 JS 实现的虚拟 DOM。",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --outfile=dist/vdom.js"
+    "build": "esbuild src/index.js --bundle --target=es2017 --format=esm  --sourcemap  --outfile=dist/vdom.js",
+    "demo": "node ./esbuild.config.js"
   },
   "keywords": ["vitrual-dom"],
+  "exports": {
+    ".": {
+      "browser": "./dist/vdom.js"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
