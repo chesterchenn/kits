@@ -1,26 +1,40 @@
-import { trimNode } from './utils';
+import { trimNode } from "./utils";
+import { NODE_TYPE } from "./constants";
 
 /**
  * 使用递归方式先序遍历 DOM 树
  * @param node 要遍历的节点
  */
-export function traversal(node) {
-  if (node && node.nodeType === 1) {
+export function traversal(node, obj) {
+  var flag = true;
+  if (node && node.nodeType === NODE_TYPE.ELEMENT_NODE) {
     console.log(node.tagName.toLowerCase());
+    obj = Object.assign({}, obj, {
+      type: node.tagName.toLowerCase(),
+    });
   }
-  if (node && node.nodeType === 3) {
+  if (node && node.nodeType === NODE_TYPE.TEXT_NODE) {
     const val = trimNode(node);
     if (val) {
       console.log(val);
     }
   }
   var childNodes = node.childNodes;
+  if (childNodes.length > 0) {
+    flag = false;
+  }
   for (var i = 0; i < childNodes.length; i++) {
     var item = childNodes[i];
-
-    if (item.nodeType === 1 || item.nodeType === 3) {
-      traversal(item);
+    if (
+      item.nodeType === NODE_TYPE.ELEMENT_NODE ||
+      item.nodeType === NODE_TYPE.TEXT_NODE
+    ) {
+      return traversal(item, obj);
     }
+
+  }
+  if (flag) {
+    return obj;
   }
 }
 
@@ -94,4 +108,3 @@ export function eachNode(rootNode, callback) {
     }
   }
 }
-

@@ -16,7 +16,8 @@
     <script type="module" >
       import { traversal } from "../dist/index.js";
       const root = document.getElementById("root");
-      traversal(root);
+      const obj = traversal(root, {});
+      console.log(obj)
     </script>
   </body>
 </html>
